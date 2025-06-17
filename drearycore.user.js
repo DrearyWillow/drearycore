@@ -4,11 +4,13 @@
 // @version      0.0.5
 // @description  extracts urls from bluesky alt text and displays as clickable chips
 // @author       drearywillow
+// @icon         https://dreary.dev/bsky/light-pink.png
+// @updateURL    https://github.com/DrearyWillow/drearycore-userscript/raw/main/drearycore.user.js
+// @downloadURL  https://github.com/DrearyWillow/drearycore-userscript/raw/main/drearycore.user.js
+// @grant        none
 // @match        https://bsky.app/*
 // @match        https://main.bsky.dev/*
 // @match        https://deer.social/*
-// @icon         https://dreary.dev/bsky/light-pink.png
-// @grant        none
 // ==/UserScript==
 
 (function() {
@@ -160,8 +162,8 @@
         if (el.dataset.chipsInjected === "true") return;
 
         const thumbnailImgs = [...el.querySelectorAll(
-            'img[src*="feed_thumbnail"]'
-        )].filter(img => img.alt && isNotQuote(img, el));
+            'img[src*="feed_thumbnail"][alt]'
+        )].filter(img => isNotQuote(img, el));
 
         if (thumbnailImgs.length === 0) {
             const container = el.querySelector("div[data-expoimage='true']")
@@ -187,8 +189,8 @@
 
         if (WATCHED_HANDLES.length !== 0) {
             const handle =
-                  (el.getAttribute("data-testid")?.match(/by-(.+)/)?.[1]) ??
-                  (el.getAttribute("aria-label")?.match(/Post by (.+)/)?.[1]);
+                (el.getAttribute("data-testid")?.match(/by-(.+)/)?.[1]) ??
+                (el.getAttribute("aria-label")?.match(/Post by (.+)/)?.[1]);
 
             if (!handle || !WATCHED_HANDLES.includes(handle)) return;
         }
