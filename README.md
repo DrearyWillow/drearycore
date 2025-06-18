@@ -1,4 +1,4 @@
-# drearycore-userscript
+# drearycore
 
 userscript implementation of [drearycore](https://github.com/futurGH/drearycore)
 
