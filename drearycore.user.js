@@ -5,15 +5,15 @@
 // @description  extracts urls from bluesky alt text and displays as clickable chips
 // @author       drearywillow
 // @icon         https://dreary.dev/bsky/light-pink.png
-// @updateURL    https://github.com/DrearyWillow/drearycore-userscript/raw/main/drearycore.user.js
-// @downloadURL  https://github.com/DrearyWillow/drearycore-userscript/raw/main/drearycore.user.js
+// @updateURL    https://github.com/DrearyWillow/drearycore/raw/main/drearycore.user.js
+// @downloadURL  https://github.com/DrearyWillow/drearycore/raw/main/drearycore.user.js
 // @grant        none
 // @match        https://bsky.app/*
 // @match        https://main.bsky.dev/*
 // @match        https://deer.social/*
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     // user-defined handles to watch. if left blank, all handles are watched.
@@ -23,7 +23,7 @@
     ];
 
     function injectChipsCSS() {
-    const cssText = `
+        const cssText = `
 .willow__chips-container {
   display: flex;
   flex-flow: wrap;
@@ -52,11 +52,10 @@
   text-decoration: none;
 }
     `;
-
-    const style = document.createElement("style");
-    style.textContent = cssText;
-    document.head.appendChild(style);
-}
+        const style = document.createElement("style");
+        style.textContent = cssText;
+        document.head.appendChild(style);
+    }
 
     function createChipsContainer(urls) {
         const container = document.createElement("div");
@@ -80,7 +79,7 @@
                     chip.textContent = urls.length === 1 ? hostname : `${hostname}${pathname}`;
                     chip.addEventListener("click", e => e.stopPropagation());
                     container.appendChild(chip);
-                } catch (e) {}
+                } catch (e) { }
             });
         });
 
@@ -138,7 +137,7 @@
         const urls = [...new Set(extractUrlsFromAlt(altText))];
         if (urls.length === 0) return;
 
-        insertChips(el, urls, videoContainer?.parentElement)
+        insertChips(el, urls, videoContainer?.parentElement);
     }
 
     function processGIFElement(el) {
@@ -166,7 +165,7 @@
         )].filter(img => isNotQuote(img, el));
 
         if (thumbnailImgs.length === 0) {
-            const container = el.querySelector("div[data-expoimage='true']")
+            const container = el.querySelector("div[data-expoimage='true']");
             if (container) lazyLoadElement(container, el, processImageElement);
             return;
         }
@@ -181,7 +180,7 @@
             if (imageContainer) break;
         }
 
-        insertChips(el, urls, imageContainer)
+        insertChips(el, urls, imageContainer);
     }
 
     function processPostElement(el) {
