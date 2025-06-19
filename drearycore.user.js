@@ -11,6 +11,7 @@
 // @match        https://bsky.app/*
 // @match        https://main.bsky.dev/*
 // @match        https://deer.social/*
+// @match        https://zeppelin.social/*
 // ==/UserScript==
 
 (function () {
