@@ -91,7 +91,11 @@
     function insertChips(el, urls, insertionPoint) {
         const chipsContainer = createChipsContainer(urls);
 
-        while (insertionPoint?.parentElement?.children.length === 1 && insertionPoint.parentElement.parentElement) {
+        while (
+            insertionPoint?.parentElement?.children.length === 1 &&
+                insertionPoint.parentElement.parentElement ||
+            insertionPoint?.parentElement?.style?.flexDirection === "row"
+        ) {
             insertionPoint = insertionPoint.parentElement;
         }
 
