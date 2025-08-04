@@ -178,11 +178,12 @@
 
         const urls = [...new Set(thumbnailImgs.flatMap(img => extractUrlsFromAlt(img.alt)))];
         if (urls.length === 0) return;
+        const lastUrl = urls[urls.length-1];
 
         let imageContainer = null;
         for (const thumbnailImg of thumbnailImgs) {
-            imageContainer = thumbnailImg.closest(`div[aria-label*="${urls[0]}"]`) ??
-                thumbnailImg.closest(`button[aria-label*="${urls[0]}"]`)?.parentElement?.parentElement?.parentElement;
+            imageContainer = thumbnailImg.closest(`div[aria-label*="${lastUrl}"]`) ??
+                thumbnailImg.closest(`button[aria-label*="${lastUrl}"]`)?.parentElement?.parentElement?.parentElement;
             if (imageContainer) break;
         }
 
